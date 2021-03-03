@@ -25,6 +25,9 @@
 - Compile
 
         ofcob addr.cob -o  ADDR
+  Openframe util dir specification for program
+
+        $OPENFRAME_HOME/util
 
 - JCL Calls
 
@@ -90,6 +93,9 @@
 - compile
 
         ofcob fRW.cob -o FRW -L$OPENFRAME_HOME/lib -ltextfh
+  Openframe util dir specification for program
+
+        $OPENFRAME_HOME/util
 
 - JCL Call
 
@@ -213,6 +219,10 @@
 
         ofcob vfrw.cob -o VFRW -L$OPENFRAME_HOME/lib -ltextfh
 
+  Openframe Util dir specification for program
+
+        $OPENFRAME_HOME/util
+
 - JCL call
 
         //********** ********** ********** ********** **********
@@ -253,7 +263,7 @@
         6   DATA61                    DATA62              EMT6     ]0012 F
         /*
         //********** ********** ********** ********** **********
-        //VSSTEP EXEC PGM=VSC
+        //VSSTEP EXEC PGM=VFRW
         //SYSPRINT DD   SYSOUT=*
         //FIN      DD   DSN=TESTS.DS01,DISP=SHR
         //FOUT     DD   DSN=TESTS.DS02,DISP=MOD
@@ -317,21 +327,25 @@
 
 - JCL calls
     
-    Openframe Util specification for CALLER.so
+    Openframe util dir specification for CALLER.so
   
         $OPENFRAME_HOME/util
         
     OpenFrame USERLIB Specification for CALLEE.so
         
-        $OPENFRAME_HOME/volume_default/SYS1.USERLIB/
+        $OPENFRAME_HOME/volume_default/SYS1.USERLIB
 
     JCL File
   
-          //CAL JOB CLASS=A
-          //CSSTEP EXEC PGM=CALLER
-          //SYSPRINT DD   SYSOUT=*
-          //SYSIN    DD   *
-          01
-          /*
+        //CL JOB CLASS=A
+        //*********************************************************************
+        //*                               STEP1                               *
+        //*********************************************************************
+        //CSSTEP   EXEC PGM=CALLER
+        //STEPLIB  DD   DSN=SYS1.USERLIB,DISP=SHR
+        //SYSPRINT DD   SYSOUT=*
+        //SYSIN    DD   *
+        11
+        /*
 
         
