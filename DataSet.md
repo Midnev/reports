@@ -24,7 +24,7 @@
     ![alt](images/dslist4.PNG)\
   Both datasets in Case 1&2 are visual
   
-### Deleting Created Catalogs
+### Deleting Created Datasets
 
 - dsdelete command
   
