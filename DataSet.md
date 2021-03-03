@@ -26,7 +26,7 @@
   
 ### Deleting Created Catalogs
 
-- delete datasets
+- delete datasets with dsdelete
   
   ![alt](images/dsdelete.PNG)\
   Case 2 deleted.\
