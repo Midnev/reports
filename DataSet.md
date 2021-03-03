@@ -23,6 +23,18 @@
     ![alt](images/dslist2.PNG)\
     ![alt](images/dslist4.PNG)\
   Both datasets in Case 1&2 are visual
+  
+### Deleting Created Catalogs
+
+- delete datasets
+  
+  ![alt](images/dsdelete.PNG)\
+  Case 2 deleted.\
+  Deleting with volume specified fails for Case 1
+  ![alt](images/dsdelete2.PNG)
+  Deleting with catalogs specified is needed for Case 2 
+    
+    
 
 
 
