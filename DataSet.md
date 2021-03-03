@@ -26,13 +26,13 @@
   
 ### Deleting Created Catalogs
 
-- delete datasets with dsdelete
+- dsdelete command
   
   ![alt](images/dsdelete.PNG)\
   Case 2 deleted.\
   Deleting with volume specified fails for Case 1
   ![alt](images/dsdelete2.PNG)
-  Deleting with catalogs specified is needed for Case 2 
+  Deleting with catalogs specification is needed for Case 2 
     
     
 
