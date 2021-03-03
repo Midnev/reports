@@ -13,7 +13,7 @@
 ### Results
 - listcat command
     ![alt](images/listcat.PNG)
-    Case 1 & 2 does not appear on first command
+    Case 1 & 2 does not appear on first command\
     ![alt](images/listcat2.PNG)
      Case 1 can be found with -n option\
      Case 2 cannot be found with given command
