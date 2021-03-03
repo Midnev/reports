@@ -11,13 +11,15 @@
         dscreate TEST.JPK.NC2 -N
 
 ### Results
-- listcat command\
+- listcat command
+  
     ![alt](images/listcat.PNG)\
     Case 1 & 2 does not appear on first command\
     ![alt](images/listcat2.PNG)\
      Case 1 can be found with -n option\
      Case 2 cannot be found with given command
-- dslist command\
+- dslist command
+  
     ![alt](images/dslist2.PNG)\
     ![alt](images/dslist4.PNG)\
   Both datasets in Case 1&2 are visual
