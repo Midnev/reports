@@ -284,10 +284,10 @@
       =======(Space)
              ID DIVISION.
               PROGRAM-ID   CALLER.
-               ENVIRONMENT DIVISION.
-                DATA DIVISION.
-                 WORKING-STORAGE SECTION.
-                  01 NUM1 PIC 9(2).
+             ENVIRONMENT DIVISION.
+             DATA DIVISION.
+              WORKING-STORAGE SECTION.
+               01 NUM1 PIC 9(2).
         
              PROCEDURE DIVISION.
               DISPLAY "CALLER START".
