@@ -92,60 +92,60 @@
 
 - compile
 
-        ofcob fRW.cob -o FRW -L$OPENFRAME_HOME/lib -ltextfh
+      sofcob fRW.cob -o FRW -L$OPENFRAME_HOME/lib -ltextfh
   Openframe util dir specification for program
 
-        $OPENFRAME_HOME/util
+      $OPENFRAME_HOME/util
 
 - JCL Call
 
-        //FILEC JOB CLASS=A
-        //*********************************************************************
-        //INITSTEP EXEC PGM=IDCAMS
-        //SYSPRINT DD   SYSOUT=*
-        //SYSIN    DD   *
-        DELETE (TEST.DS01 TEST.DS02)
-        
-        DEFINE                            -
-            NONVSAM (NAME(TEST.DS01)      -
-            VOLUMES(DEFVOL))
-        DEFINE                            -
-            NONVSAM (NAME(TEST.DS02)      -
-            VOLUMES(DEFVOL))
-        
-        SET MAXCC=0
-        /*
-        //*********************************************************************
-        //*                               STEP2                               *
-        //*********************************************************************
-        //COPYSTEP EXEC PGM=IEBGENER
-        //SETTER   SET  PRMN=TEST
-        //SYSPRINT DD   SYSOUT=*
-        //SYSIN    DD   DUMMY
-        //SYSUT2   DD   DSN=&PRMN..DS01,DISP=MOD
-        //SYSUT1   DD   *
-        1ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
-        2ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
-        3ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
-        4ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
-        5ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
-        6ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
-        /*
-        //*********************************************************************
-        //*                               STEP3                               *
-        //*********************************************************************
-        //FSTEP EXEC PGM=FR
-        //SYSPRINT DD   SYSOUT=*
-        //FIN   DD   DSN=TEST.DS01,DISP=MOD
-        //FOUT  DD   DSN=TEST.DS02,DISP=MOD
-        //*********************************************************************
-        //*                               STEP4                               *
-        //*********************************************************************
-        //PRINT EXEC PGM=IDCAMS
-        //SYSPRINT DD SYSOUT=*
-        //SYSIN DD *
-        PRINT INDATASET(TEST.DS02) CHARACTER
-        /*
+      //FILEC JOB CLASS=A
+      //*********************************************************************
+      //INITSTEP EXEC PGM=IDCAMS
+      //SYSPRINT DD   SYSOUT=*
+      //SYSIN    DD   *
+      DELETE (TEST.DS01 TEST.DS02)
+      
+      DEFINE                            -
+          NONVSAM (NAME(TEST.DS01)      -
+          VOLUMES(DEFVOL))
+      DEFINE                            -
+          NONVSAM (NAME(TEST.DS02)      -
+          VOLUMES(DEFVOL))
+      
+      SET MAXCC=0
+      /*
+      //*********************************************************************
+      //*                               STEP2                               *
+      //*********************************************************************
+      //COPYSTEP EXEC PGM=IEBGENER
+      //SETTER   SET  PRMN=TEST
+      //SYSPRINT DD   SYSOUT=*
+      //SYSIN    DD   DUMMY
+      //SYSUT2   DD   DSN=&PRMN..DS01,DISP=MOD
+      //SYSUT1   DD   *
+      1ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
+      2ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
+      3ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
+      4ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
+      5ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
+      6ADCBEFGHIJKLMNOPQRSTUVWXYZ1234567890
+      /*
+      //*********************************************************************
+      //*                               STEP3                               *
+      //*********************************************************************
+      //FSTEP EXEC PGM=FR
+      //SYSPRINT DD   SYSOUT=*
+      //FIN   DD   DSN=TEST.DS01,DISP=MOD
+      //FOUT  DD   DSN=TEST.DS02,DISP=MOD
+      //*********************************************************************
+      //*                               STEP4                               *
+      //*********************************************************************
+      //PRINT EXEC PGM=IDCAMS
+      //SYSPRINT DD SYSOUT=*
+      //SYSIN DD *
+      PRINT INDATASET(TEST.DS02) CHARACTER
+      /*
 
 
 
@@ -225,54 +225,54 @@
 
 - JCL call
 
-        //********** ********** ********** ********** **********
-        //VSA JOB CLASS=A
-        //*
-        //INITSTEP EXEC PGM=IDCAMS
-        //SYSPRINT DD   SYSOUT=*
-        //SYSIN    DD   *
-        DELETE (TESTS.DS01 TESTS.DS02)
-        
-        DEFINE CLUSTER                    -
-                   (NAME(TESTS.DS01)      -
-            RECORDSIZE(80, 80)            -
-            CYLINDERS(3,2)                -
-            KEYS(4,0)                     -
-            VOLUMES(NEWVOL)               -
-            INDEXED)                      -
-           INDEX (NAME(TESTS.DS01.INDEX)) -
-        DATA (NAME(TESTS.DS01.DATA))
-        
-        DEFINE                            -
-            NONVSAM (NAME(TESTS.DS02)     -
-            VOLUMES(NEWVOL))
-        
-        SET MAXCC=0
-        /*
-        //********** ********** ********** ********** **********
-        //COPYSTEP EXEC PGM=IEBGENER
-        //SYSPRINT DD   SYSOUT=*
-        //SYSIN    DD   DUMMY
-        //SYSUT2   DD   DSN=TESTS.DS01,DISP=MOD
-        //SYSUT1   DD   *
-        1   DATA11   t         t      DATA12             tEMT1     ]0565 A
-        2   DATA21                    DATA22              EMT2     ]0677 B
-        3   DATA31                    DATA32              EMT3     ]0783 C
-        4   DATA41                    DATA42              EMT4     ]0892 D
-        5   DATA51                    DATA52              EMT5     ]0901 E
-        6   DATA61                    DATA62              EMT6     ]0012 F
-        /*
-        //********** ********** ********** ********** **********
-        //VSSTEP EXEC PGM=VFRW
-        //SYSPRINT DD   SYSOUT=*
-        //FIN      DD   DSN=TESTS.DS01,DISP=SHR
-        //FOUT     DD   DSN=TESTS.DS02,DISP=MOD
-        //********** ********** ********** ********** **********
-        //PRINT EXEC PGM=IDCAMS
-        //SYSPRINT DD SYSOUT=*
-        //SYSIN DD *
-        PRINT INDATASET(TESTS.DS02) CHARACTER
-        /*
+      //********** ********** ********** ********** **********
+      //VSA JOB CLASS=A
+      //*
+      //INITSTEP EXEC PGM=IDCAMS
+      //SYSPRINT DD   SYSOUT=*
+      //SYSIN    DD   *
+      DELETE (TESTS.DS01 TESTS.DS02)
+      
+      DEFINE CLUSTER                    -
+                 (NAME(TESTS.DS01)      -
+          RECORDSIZE(80, 80)            -
+          CYLINDERS(3,2)                -
+          KEYS(4,0)                     -
+          VOLUMES(NEWVOL)               -
+          INDEXED)                      -
+         INDEX (NAME(TESTS.DS01.INDEX)) -
+      DATA (NAME(TESTS.DS01.DATA))
+      
+      DEFINE                            -
+          NONVSAM (NAME(TESTS.DS02)     -
+          VOLUMES(NEWVOL))
+      
+      SET MAXCC=0
+      /*
+      //********** ********** ********** ********** **********
+      //COPYSTEP EXEC PGM=IEBGENER
+      //SYSPRINT DD   SYSOUT=*
+      //SYSIN    DD   DUMMY
+      //SYSUT2   DD   DSN=TESTS.DS01,DISP=MOD
+      //SYSUT1   DD   *
+      1   DATA11   t         t      DATA12             tEMT1     ]0565 A
+      2   DATA21                    DATA22              EMT2     ]0677 B
+      3   DATA31                    DATA32              EMT3     ]0783 C
+      4   DATA41                    DATA42              EMT4     ]0892 D
+      5   DATA51                    DATA52              EMT5     ]0901 E
+      6   DATA61                    DATA62              EMT6     ]0012 F
+      /*
+      //********** ********** ********** ********** **********
+      //VSSTEP EXEC PGM=VFRW
+      //SYSPRINT DD   SYSOUT=*
+      //FIN      DD   DSN=TESTS.DS01,DISP=SHR
+      //FOUT     DD   DSN=TESTS.DS02,DISP=MOD
+      //********** ********** ********** ********** **********
+      //PRINT EXEC PGM=IDCAMS
+      //SYSPRINT DD SYSOUT=*
+      //SYSIN DD *
+      PRINT INDATASET(TESTS.DS02) CHARACTER
+      /*
 
         
 
