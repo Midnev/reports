@@ -107,11 +107,11 @@
         DELETE (TEST.DS01 TEST.DS02)
         
         DEFINE                            -
-        NONVSAM (NAME(TEST.DS01)      -
-        VOLUMES(DEFVOL))
+            NONVSAM (NAME(TEST.DS01)      -
+            VOLUMES(DEFVOL))
         DEFINE                            -
-        NONVSAM (NAME(TEST.DS02)      -
-        VOLUMES(DEFVOL))
+            NONVSAM (NAME(TEST.DS02)      -
+            VOLUMES(DEFVOL))
         
         SET MAXCC=0
         /*
@@ -234,18 +234,18 @@
         DELETE (TESTS.DS01 TESTS.DS02)
         
         DEFINE CLUSTER                    -
-        (NAME(TESTS.DS01)      -
-        RECORDSIZE(80, 80)            -
-        CYLINDERS(3,2)                -
-        KEYS(4,0)                     -
-        VOLUMES(NEWVOL)               -
-        INDEXED)                      -
-        INDEX (NAME(TESTS.DS01.INDEX)) -
+                   (NAME(TESTS.DS01)      -
+            RECORDSIZE(80, 80)            -
+            CYLINDERS(3,2)                -
+            KEYS(4,0)                     -
+            VOLUMES(NEWVOL)               -
+            INDEXED)                      -
+           INDEX (NAME(TESTS.DS01.INDEX)) -
         DATA (NAME(TESTS.DS01.DATA))
         
         DEFINE                            -
-        NONVSAM (NAME(TESTS.DS02)         -
-        VOLUMES(NEWVOL))
+            NONVSAM (NAME(TESTS.DS02)     -
+            VOLUMES(NEWVOL))
         
         SET MAXCC=0
         /*
@@ -334,7 +334,7 @@
     OpenFrame USERLIB Specification for CALLEE.so
         
         $OPENFRAME_HOME/volume_default/SYS1.USERLIB
-
+  
     JCL File
   
         //CL JOB CLASS=A
