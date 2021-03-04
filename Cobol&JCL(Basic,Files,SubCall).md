@@ -98,7 +98,7 @@
       $OPENFRAME_HOME/util
 
 - JCL Call
-
+  
       //FILEC JOB CLASS=A
       //*********************************************************************
       //INITSTEP EXEC PGM=IDCAMS
@@ -152,7 +152,9 @@
 
 ### Objective : VSAM ACCESS
 
-- Create a copybook 
+- Create a copybook with same name as DS to create
+
+  in $OPENFRAME_HOME/tsam/copybook/TESTS.DS01.cpy
 
              01 F-IN.
               02 I-KEY        PIC    9(4).
