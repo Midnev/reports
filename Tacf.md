@@ -115,26 +115,46 @@
     
     ![alt](images2/creategroup%20sub2.PNG)
   
+## TESTING BELOW......
 
 - create 6 datasets
 
-  - 3 /naming convention rules, only 1 group with alter allowed
+  - 3 DS, naming convention rules, only 1 group with Alter allowed
+  
+    (NON-VSAM DS needs volumes, VSAM does not use volume or UNIT)
      
-        ADDSD TEST.FRST.DS001 UACC(ALTER)
-        ADDSD TEST.SCND.DS002 UACC(ALTER)
-        ADDSD TEST.THRD.DS003 UACC(ALTER)
+        ADDSD SPCL.FRST.DATA UNIT(G) VOLUME(DEFVOL) 
+        ADDSD SPCL.SCND.TEXT UNIT(G) VOLUME(DEFVOL) UACC(NONE)
+        ADDSD SPCL.THRD.COBOL UNIT(G) VOLUME(DEFVOL) UACC(NONE)
     
-        ALTSD TEST.DS002 OWNER(GRP01)
+    ![alt](images2/addsd1.PNG)
+        
+        LISTDSD DATASET('SPCL.FRST.DATA')
 
+        -- current : profile not found -- 
+        WHAT IS A PROFILE NAME FOR A DATASET????        
+
+        PERMIT 'SPCL**'  ACCESS(ALTER) ID(GRP01)
+        PERMIT 'SPCL.FRST.DATA'  ACCESS(ALTER) ID(GRP01)
+      
+        PERMIT 'SPCL.SCND.TEXT' ACCESS(ALTER) ID(GRP01) 
+        PERMIT 'SPCL.THRD.COBOL' ACCESS(ALTER) ID(GRP01)
+
+        PERMIT 'SPCL.FRST.DATA' ID(GRP02) ACCESS(READ)
+  
   - 2 datasets READ for all groups
 
-        ADDSD TEST.RD.DS004 
-        ADDSD TEST.RD2.DS005
-
+        ADDSD TEST.RD.DS001 UACC(READ) UNIT(G) VOLUME(DEFVOL)
+        ADDSD TEST.RD.DS002
+        PERMIT 'TEST.RD.DS002' ID(*) ACCESS(READ)
+        
+        
     
-  - 1 discrete dataset profile
+  - 1 discrete dataset profile ( NEED COPY BOOK???)
 
-        ADDSD TEST.DSCRT.DS006 UNIT(D)
+        ADDSD TEST.DSCRT.DS003 UNIT(D)
+
+
     
 
 - Authorization 
@@ -144,12 +164,36 @@
         ALTUSER ADT WHEN (DAYS(MONDAY,WEDNESDAY, FRIDAY) TIME(1400:1900)
         ALTGROUP GRP01 OWNER(ADT)
     
-  - only 1 group is allowed to run JCL through TJESMGR
-         
-        permit 
+        PERMIT ACCESS() GROUP(GRP2) WHEN(DAYS(MONDAY,WEDNESDAY,FRIDAY) TIME(1400:1900) )
     
+  - only 1 group is allowed to run JCL through TJESMGR
+        
+        define profile name ps 
+        
+        RALTER UTILITY UTY
+        
+
+        RDEFINE TJESMGR TJM NOTIFY(ROOT) OWNER(ROOT) UACC(NONE)
+    
+    ![alt](images2/AUTH2.PNG)
+
+        PERMIT TJM ID(GRP1) ACCESS(READ) 
+      
+
   - only 1 group is allowed to VIEW SPOOL through tjesmgr
     
+        RDEFINE JESSPOOL JSP
+    
+        PERMIT <PROFILE NAME tjesmgr?> CLASS(JESSPOOL) ID(GRP03) ACCESS(READ)
+
+
+
+
+2. 
+
+
+3.
+
 
 
 
