@@ -7,7 +7,7 @@
 인가 : USER is able to run allowed commands to that specific resource
 
 
-### Tacf command prac
+### 1.Tacf command prac
 
 - create 6 users
   
@@ -114,33 +114,39 @@
     3 is sub of 2  
     
     ![alt](images2/creategroup%20sub2.PNG)
-  
-## TESTING BELOW......
 
 - create 6 datasets
 
   - 3 DS, naming convention rules, only 1 group with Alter allowed
   
     (NON-VSAM DS needs volumes, VSAM does not use volume or UNIT)
-     
-        ADDSD SPCL.FRST.DATA UNIT(G) VOLUME(DEFVOL) 
-        ADDSD SPCL.SCND.TEXT UNIT(G) VOLUME(DEFVOL) UACC(NONE)
-        ADDSD SPCL.THRD.COBOL UNIT(G) VOLUME(DEFVOL) UACC(NONE)
-    
-    ![alt](images2/addsd1.PNG)
         
-        LISTDSD DATASET('SPCL.FRST.DATA')
+        dscreate SPCL.FRST.DATA
+        dscreate SPCL.SCND.TEST
+        dscreate SPCL.THRD.COBOL
+    
+    ![alt](images2/createDS.PNG)
+    
+        ADDSD SPCL.*.** UNIT(G) VOLUME(DEFVOL) 
+        PERMIT 'SPCL.*.**'  ACCESS(ALTER) ID(GRP01)
+        ALTDSD SPCL.*.** UNIT(G) VOLUME(DEFVOL) UACC(NONE)
+    
+    ![alt](images2/createDSprof1.PNG)
 
-        -- current : profile not found -- 
-        WHAT IS A PROFILE NAME FOR A DATASET????        
+    ![alt](images2/createDSprof1-1.PNG)
+        
+    Commands not used
+    
+        *ADDSD SPCL.SCND.TEXT UNIT(G) VOLUME(DEFVOL) UACC(NONE)
+        *ADDSD SPCL.THRD.COBOL UNIT(G) VOLUME(DEFVOL) UACC(NONE)
+        
+        *LISTDSD DATASET('SPCL.FRST.DATA')
 
-        PERMIT 'SPCL**'  ACCESS(ALTER) ID(GRP01)
-        PERMIT 'SPCL.FRST.DATA'  ACCESS(ALTER) ID(GRP01)
-      
-        PERMIT 'SPCL.SCND.TEXT' ACCESS(ALTER) ID(GRP01) 
-        PERMIT 'SPCL.THRD.COBOL' ACCESS(ALTER) ID(GRP01)
-
-        PERMIT 'SPCL.FRST.DATA' ID(GRP02) ACCESS(READ)
+        *PERMIT 'SPCL.*.**'  ACCESS(ALTER) ID(GRP01)
+        *PERMIT 'SPCL.FRST.DATA'  ACCESS(ALTER) ID(GRP01)
+        *PERMIT 'SPCL.SCND.TEXT' ACCESS(READ) ID(GRP02) 
+        *PERMIT 'SPCL.THRD.COBOL' ACCESS(ALTER) ID(GRP01)
+        *PERMIT 'SPCL.FRST.DATA' ID(GRP02) ACCESS(READ)
   
   - 2 datasets READ for all groups
 
@@ -152,7 +158,7 @@
     
   - 1 discrete dataset profile ( NEED COPY BOOK???)
 
-        ADDSD TEST.DSCRT.DS003 UNIT(D)
+        ADDSD TEST.DSCRT.DS001 UNIT(D)
 
 
     
@@ -160,39 +166,45 @@
 - Authorization 
 
   - 1 group authorized MWF 14:00 ~ 19:00
+        
+        RDEFINE OFMANAGR LGN 
+        PERMIT LGN CLASS(OFMANAGR) ID(GRP02) WHEN(DAYS(MONDAY,WEDNESDAY,FRIDAY) TIME(1400:1900) )
+        
+      ![alt](images2/AUTH1.PNG)
+
+      ![alt](images2/AUTH1-1.PNG)
+
+        *PERMIT LGN ACCESS() GROUP(GRP1) WHEN(DAYS(ANYDAY) TIME(0000:2400) )
+        *PERMIT LGN ACCESS() GROUP(GRP3) WHEN(DAYS(ANYDAY) TIME(0000:2400) )
     
-        ALTUSER ADT WHEN (DAYS(MONDAY,WEDNESDAY, FRIDAY) TIME(1400:1900)
-        ALTGROUP GRP01 OWNER(ADT)
-    
-        PERMIT ACCESS() GROUP(GRP2) WHEN(DAYS(MONDAY,WEDNESDAY,FRIDAY) TIME(1400:1900) )
+        
+  
+
     
   - only 1 group is allowed to run JCL through TJESMGR
-        
-        define profile name ps 
-        
-        RALTER UTILITY UTY
-        
 
         RDEFINE TJESMGR TJM NOTIFY(ROOT) OWNER(ROOT) UACC(NONE)
-    
-    ![alt](images2/AUTH2.PNG)
 
-        PERMIT TJM ID(GRP1) ACCESS(READ) 
-      
+        PERMIT TJM CLASS(TJESMGR) ID(GRP01) ACCESS(READ)
+
+    ![alt](images2/AUTH2.PNG)    
+
+    ![alt](images2/AUTH2-1.PNG)  
 
   - only 1 group is allowed to VIEW SPOOL through tjesmgr
     
-        RDEFINE JESSPOOL JSP
+        RDEFINE JESSPOOL JSP OWNER(ROOT) UACC(NONE)
     
-        PERMIT <PROFILE NAME tjesmgr?> CLASS(JESSPOOL) ID(GRP03) ACCESS(READ)
+        PERMIT JSP CLASS(JESSPOOL) ID(GRP03) ACCESS(READ)
+
+    ![alt](images2/AUTH3.PNG)
 
 
 
+### 2. 
 
-2. 
 
-
-3.
+### 3. 교육자료 (OpenFrame_TACF_Introduction_20210326_kr)의 24-29 수행 후 작업들을 기록 및 스크린샷을 첨부해주세요. (20점) 
 
 
 
