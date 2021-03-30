@@ -1,13 +1,13 @@
 ## Tacf practices
 
-### 인증 인가의 차이점 with Resource examples
+### 1.인증 인가의 차이점 with Resource examples
 
 인증(Authentication) : A user is able to Login to the system.
 
 인가(Authorize) : A user is able to read/alter/update datasets or use utilities with permission
 
 
-### 1.Tacf command practices
+### 2.Tacf command practices
 
 - create 6 users
   
