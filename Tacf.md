@@ -136,7 +136,12 @@
     ![alt](images2/createDSprof1-1.PNG)
         
     Commands not used
-    
+        
+        ADDSD SPCL.*.**  UACC(NONE)  UNIT(G) VOLUME(DEFVOL)
+        DELDSD SPCL.*.**
+        ALTDSD SPCL.*.** VOLUME(DEFVOL) UNIT(G) UACC(NONE)
+        ALTDSD SPCL.FRST.DATA UNIT(G) VOLUME(DEFVOL) 
+        PERMIT 'SPCL.FRST.DATA'  ACCESS(ALTER) ID(GRP01)
         *ADDSD SPCL.SCND.TEXT UNIT(G) VOLUME(DEFVOL) UACC(NONE)
         *ADDSD SPCL.THRD.COBOL UNIT(G) VOLUME(DEFVOL) UACC(NONE)
         
@@ -153,12 +158,13 @@
         ADDSD TEST.RD.DS001 UACC(READ) UNIT(G) VOLUME(DEFVOL)
         ADDSD TEST.RD.DS002
         PERMIT 'TEST.RD.DS002' ID(*) ACCESS(READ)
-        
+        LISTDSD DATASET(TEST.RD.DS002)
         
     
   - 1 discrete dataset profile ( NEED COPY BOOK???)
 
         ADDSD TEST.DSCRT.DS001 UNIT(D)
+        ALTDSD TEST.DSCRT.DS001 UNIT(D)
 
 
     
@@ -176,10 +182,7 @@
 
         *PERMIT LGN ACCESS() GROUP(GRP1) WHEN(DAYS(ANYDAY) TIME(0000:2400) )
         *PERMIT LGN ACCESS() GROUP(GRP3) WHEN(DAYS(ANYDAY) TIME(0000:2400) )
-    
-        
   
-
     
   - only 1 group is allowed to run JCL through TJESMGR
 
@@ -203,9 +206,12 @@
 
 ### 2. 
 
+- the program works but...
+
 
 ### 3. 교육자료 (OpenFrame_TACF_Introduction_20210326_kr)의 24-29 수행 후 작업들을 기록 및 스크린샷을 첨부해주세요. (20점) 
 
+- 
 
 
 
