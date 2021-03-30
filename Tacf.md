@@ -2,12 +2,12 @@
 
 ### 인증 인가의 차이점 with Resource examples
 
-인증 : USER is able to list resources
+인증(Authentication) : A user is able to Login to the system.
 
-인가 : USER is able to run allowed commands to that specific resource
+인가(Authorize) : A user is able to read/alter/update datasets or use utilities with permission
 
 
-### 1.Tacf command prac
+### 1.Tacf command practices
 
 - create 6 users
   
@@ -160,11 +160,16 @@
         PERMIT 'TEST.RD.DS002' ID(*) ACCESS(READ)
         LISTDSD DATASET(TEST.RD.DS002)
         
+      ![alt](images2/createDS2.PNG)
+      ![alt](images2/createDSprof2.PNG)
+        
     
   - 1 discrete dataset profile ( NEED COPY BOOK???)
 
         ADDSD TEST.DSCRT.DS001 UNIT(D)
         ALTDSD TEST.DSCRT.DS001 UNIT(D)
+
+     ![alt](images2/createDS3.PNG)
 
 
     
@@ -206,10 +211,10 @@
 
 ### 2. 
 
-- the program works but...
+- 
 
 
-### 3. 교육자료 (OpenFrame_TACF_Introduction_20210326_kr)의 24-29 수행 후 작업들을 기록 및 스크린샷을 첨부해주세요. (20점) 
+### 3.  24-29
 
 - 
 
