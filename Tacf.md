@@ -164,10 +164,10 @@
       ![alt](images2/createDSprof2.PNG)
         
     
-  - 1 discrete dataset profile ( NEED COPY BOOK???)
+  - 1 discrete dataset profile
 
         ADDSD TEST.DSCRT.DS001 UNIT(D)
-        ALTDSD TEST.DSCRT.DS001 UNIT(D)
+        *ALTDSD TEST.DSCRT.DS001 UNIT(D)
 
      ![alt](images2/createDS3.PNG)
 
@@ -209,19 +209,86 @@
 
 
 
-### 2. 
+### 2-2
 
 - 
 
 
 ### 3.  24-29
 
-- 
+- user
+    
+      dn: uid=tmax,ou=People,dc=example,dc=com
+      objectClass: inetOrgPerson
+      objectClass: posixAccount
+      objectClass: shadowAccount
+      uid: tmax
+      sn: LASTNAME
+      givenName: FIRSTNAME
+      cn: FULLNAME
+      displayName: DISPLAYNAME
+      uidNumber: 10000
+      gidNumber: 5000
+      userPassword: banana
+      gecos: FULLNAME
+      loginShell: /bin/bash
+      homeDirectory: USERDIRECTORY
+
+  add user
+
+      ldapadd -x -D cn=admin,dc=example,dc=com -W -f ldap_data2.ldif
+
+  search user
+
+      ldapsearch -h 10.36.31.61 -x -b "uid=tmax,ou=People,dc=example,dc=com"
+
+  
 
 
+- ldap user check from client server (tmax banana)
+
+![alt](images2/ldap%20user%20info.PNG)  
+
+- ldap safp success, tacf failure
+
+![alt](images2/ldap%20safp%20success%20&%20tacf%20fail.PNG)
 
 
+- steps to use ldap 
 
+      1. safp -d command works
+      2. tacflogin doesn't work
+      3. OSCOIVP1 region fails on PAM=YES, works on PAM=NO 
+        (faild because CICS_USER & ROOT/sys1 doesn't exist in ldap)
+      4. tried giving ROOT/SYS1 => logs in as root/sys, but not tmax/banana
+          ldapsearch -h 10.36.31.61 -x -b "uid=ROOT,ou=People,dc=example,dc=com"
+      ======================================== ldap_data.ldif
+      dn: uid=ROOT,ou=People,dc=example,dc=com
+      objectClass: inetOrgPerson
+      objectClass: posixAccount
+      objectClass: shadowAccount
+      uid: ROOT
+      sn: LASTNAME
+      givenName: FIRSTNAME
+      cn: FULLNAME
+      displayName: DISPLAYNAME
+      uidNumber: 10000
+      gidNumber: 5000
+      userPassword: SYS1
+      gecos: FULLNAME
+      loginShell: /bin/bash
+      homeDirectory: USERDIRECTORY
+      ========================================
+      5. "ADDUSER tmax AUDITOR(ALL(READ,DELETE)) PASSWORD(berry)"
+      6. ldap works!!!
+  
+   banana : ldap passwd (PAM=YES)
+  
+   ![alt](images2/ldap%20safp%20success.PNG)
+
+- conclusion
+  
+  using PAM & ldap must need user in original database 
 
 
 
