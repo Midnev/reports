@@ -224,8 +224,19 @@
     - TEST.RD.DS001 dataset attribute changed from G > D but still doesn't work
   
     - TEST.RD.DS002 dataset have permit for ID(*) to READ but no access from accounts
+    
+  - problem found?
   
-    - 
+    ![alt](images2/TESTCHECK2.PNG)
+  
+    Changed expired state
+  
+    result (works, still something wrong)
+
+    ![alt](images2/checkauth%20nat1.PNG)
+  
+    
+    
   
 
 
@@ -277,7 +288,7 @@
         (faild because CICS_USER & ROOT/sys1 doesn't exist in ldap)
       4. tried giving ROOT/SYS1 => logs in as root/sys, but not tmax/banana
           ldapsearch -h 10.36.31.61 -x -b "uid=ROOT,ou=People,dc=example,dc=com"
-      ======================================== ldap_data.ldif
+      ======================================== ldap_data3.ldif
       dn: uid=ROOT,ou=People,dc=example,dc=com
       objectClass: inetOrgPerson
       objectClass: posixAccount
@@ -301,9 +312,9 @@
   
    ![alt](images2/ldap%20safp%20success.PNG)
 
-  conclusion
+   conclusion
   
-  using PAM & ldap must need user in original database 
+   using PAM & ldap must need user in original database 
 
 
 
