@@ -219,9 +219,13 @@
   
     - SPCL(GRP01) user have access to SPCL.** datasets(probably because of Naming)
   
-    - TEST.RD.** datasets have UACC but no access from accounts
+    - TEST.RD.DS001 dataset have UACC but no access from accounts
   
-    
+    - TEST.RD.DS001 dataset attribute changed from G > D but still doesn't work
+  
+    - TEST.RD.DS002 dataset have permit for ID(*) to READ but no access from accounts
+  
+    - 
   
 
 
@@ -257,16 +261,13 @@
 
       ldapsearch -h 10.36.31.61 -x -b "uid=tmax,ou=People,dc=example,dc=com"
 
-  
-
-
 - ldap user check from client server (tmax banana)
 
-![alt](images2/ldap%20user%20info.PNG)  
+  ![alt](images2/ldap%20user%20info.PNG)  
 
 - ldap safp success, tacf failure
 
-![alt](images2/ldap%20safp%20success%20&%20tacf%20fail.PNG)
+  ![alt](images2/ldap%20safp%20success%20&%20tacf%20fail.PNG)
 
 - steps to use ldap with above error 
 
@@ -300,7 +301,7 @@
   
    ![alt](images2/ldap%20safp%20success.PNG)
 
-- conclusion
+  conclusion
   
   using PAM & ldap must need user in original database 
 
