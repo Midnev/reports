@@ -211,12 +211,27 @@
 
 ### 2-2
 
-- 
+- issues
+  
+  - default group & group access trials
+    
+    - tried giving default group for NAT1
+  
+    - SPCL(GRP01) user have access to SPCL.** datasets(probably because of Naming)
+  
+    - TEST.RD.** datasets have UACC but no access from accounts
+  
+    
+  
 
 
 ### 3.  24-29
 
-- user
+- nslcd conf setting different from ppt
+
+      base  dc=example,dc=com
+
+- user info (ldap_data2.ldif)
     
       dn: uid=tmax,ou=People,dc=example,dc=com
       objectClass: inetOrgPerson
@@ -238,7 +253,7 @@
 
       ldapadd -x -D cn=admin,dc=example,dc=com -W -f ldap_data2.ldif
 
-  search user
+  search user from client
 
       ldapsearch -h 10.36.31.61 -x -b "uid=tmax,ou=People,dc=example,dc=com"
 
@@ -253,8 +268,7 @@
 
 ![alt](images2/ldap%20safp%20success%20&%20tacf%20fail.PNG)
 
-
-- steps to use ldap 
+- steps to use ldap with above error 
 
       1. safp -d command works
       2. tacflogin doesn't work
