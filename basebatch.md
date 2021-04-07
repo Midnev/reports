@@ -9,14 +9,14 @@
       01 TEST01.
          03 TEST1-KEY PIC 9(7) COMP-3.
          03 TEST1-DATA PIC X(6).
-         03 TEST1-RD REDEFINES TEST1-DATA PIC X(6)
+         03 TEST1-RD REDEFINES TEST1-DATA PIC X(6).
 
   case2:
     
       01 TEST01.
         03 TEST1-KEY PIC 9(7) COMP-3.
         03 TEST1-DATA PIC X(6).
-      01 TEST1-RD REDEFINES TEST01 PIC X(10)
+      01 TEST1-RD REDEFINES TEST01 PIC X(10).
 
 - 2 
 
@@ -54,7 +54,7 @@
 
   - idcams 
     
-         idcams define -t CL -n COPY.BOOK -k4,0 -l 6,6
+         idcams define -t CL -n COPY.BOOK -k4,0 -l 10,10
 
 ### Question2
 
