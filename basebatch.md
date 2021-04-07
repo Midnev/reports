@@ -18,10 +18,10 @@
         03 TEST1-DATA PIC X(6).
       01 TEST1-RD REDEFINES TEST01 PIC X(10).
 
-- 2 
+- 2 !! comp-3 
 
-      00000013414243444546
-      000000134A4B4C4D4E
+      0000001C414243444546
+      0000001C4A4B4C4D4E
 
 - 3 
 
@@ -30,7 +30,7 @@
         mkdir newvolume
 
   - edit config files
-    
+     
     volume.conf
         
         [VOLUME]
@@ -52,9 +52,9 @@
         cd $OPENFRAME_HOME/tsam/copybook
         vi COPY.BOOK.cpy
 
-  - idcams 
+  - idcams !!(variable length)
     
-         idcams define -t CL -n COPY.BOOK -k4,0 -l 10,10
+         idcams define -t CL -n COPY.BOOK -k 4,0 -l 13,14
 
 ### Question2
 
@@ -89,7 +89,7 @@
         //SORTIN DD DSN=TEST.INPUT.DATASET,DISP=SHR
         //SORTOUT DD DSN=TEST.OUTPUT.DATASET,DISP=(,CATLG,DELETE)
         //SYSIN DD *
-          SORT FIELDS=(6,1,A),FORMAT=CH
+          SORT FIELDS=(6,1,A,8,1,D),FORMAT=CH
         /*
         //*--------------------------------------------------------------------
         // EXEC PGM=TESTCOB
