@@ -47,11 +47,14 @@
     
         voladd define NEWVOL $OPENFRAME_HOME/newvolume
 
-  move copy book
+  - create copy book in dir
 
-        cp COPY.BOOK.cpy $OPENFRAME_HOME/tsam/copybook
+        cd $OPENFRAME_HOME/tsam/copybook
+        vi COPY.BOOK.cpy
 
-  idcams defines -t CL -n COPY.BOOK -k4,0 -l 6,6
+  - idcams 
+    
+         idcams define -t CL -n COPY.BOOK -k4,0 -l 6,6
 
 ### Question2
 
