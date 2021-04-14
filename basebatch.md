@@ -54,7 +54,7 @@
 
   - idcams !!(variable length)
     
-         idcams define -t CL -n COPY.BOOK -k 4,0 -l 13,14
+         idcams define -t CL -n COPY.BOOK -k 4,0 -l 8,10
 
 ### Question2
 
@@ -146,7 +146,7 @@
                  0002-READ.
                    READ INPUT-FD
                     AT END MOVE 'Y' TO INPUT-EOF.
-                    IF INPUT-EOF-N
+                    IF INPUT-EOF-N*
                       DISPLAY INPUT-REC.
                     PERFORM 0003-WRITE.
                  0002-READ-EXIT.
